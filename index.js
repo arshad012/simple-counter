@@ -60,4 +60,6 @@ minus_btn.onclick = () => {
 reset_btn.onclick = () => {
     localStorage.setItem('counter', 0);
     count_div.innerText = 0;
+
+    window.location.reload();
 }
