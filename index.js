@@ -7,19 +7,21 @@ const indicator = document.getElementById('indicator');
 
 let i;
 
-// localStorage.removeItem('counter');
-
 window.onload = () => {
-    const count = localStorage.getItem('counter') || 0;
-    localStorage.setItem('counter', count);
-
-    i=count;
-
+    
     startCounter();
 }
 
 
 const startCounter = () => {
+    const count = localStorage.getItem('counter') || 0;
+    localStorage.setItem('counter', count);
+
+    if(count == 33) {
+        indicator.innerText = 'Limit reached';
+    }
+
+    i=count;
 
     count_div.innerText = i;
 }
@@ -29,13 +31,14 @@ const startCounter = () => {
 add_btn.onclick = () => {
     
     i++
-    if(i > 33) {
+    if(i >= 33) {
         i = 33;
         indicator.innerText = 'Limit reached';
     }
     else {
         indicator.innerText = null;
     }
+    
 
     count_div.innerText = i;
     localStorage.setItem('counter', i);
@@ -51,6 +54,9 @@ minus_btn.onclick = () => {
         i=0;
         indicator.innerText = 'Cannot decrease less then "0"';
     }
+    else {
+        indicator.innerText = null;
+    }
     count_div.innerText = i;
     localStorage.setItem('counter', i);
 }
@@ -59,7 +65,7 @@ minus_btn.onclick = () => {
 
 reset_btn.onclick = () => {
     localStorage.setItem('counter', 0);
-    count_div.innerText = 0;
-
-    window.location.reload();
+    i=0;
+    count_div.innerText = i;
+    indicator.innerText = null;
 }
